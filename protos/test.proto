@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package grpc_demo;
+
+service TestSrv {
+  rpc OneReqOneResp (Req) returns (MsgBatch) {}
+  rpc MultiReqOneResp (stream Req) returns (MsgBatch) {}
+  rpc OneReqMultiResp (Req) returns (stream MsgBatch) {}
+  rpc MultiReqMultiResp (stream Req) returns (stream MsgBatch) {}
+}
+
+message Req {
+  string cmd = 1;
+  string params = 2;
+}
+
+message MsgBatch {
+  int32 code = 1;
+  string msg = 2;
+  string data = 3;
+}
